@@ -42,7 +42,10 @@
   ],
   "homepage": "https://github.com/masaya-fukazawa/cpoo",
   "keywords": [
-    "oclif"
+    "oclif",
+    "react",
+    "component",
+    "generator"
   ],
   "license": "MIT",
   "main": "lib/index.js",
