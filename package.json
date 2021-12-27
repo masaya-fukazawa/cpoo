@@ -8,28 +8,28 @@
   },
   "bugs": "https://github.com/masaya-fukazawa/cpoo/issues",
   "dependencies": {
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
-    "@oclif/plugin-help": "^3.2.2",
-    "chalk": "^4.1.0",
+    "@oclif/command": "^1.8.16",
+    "@oclif/config": "^1.18.2",
+    "@oclif/plugin-help": "^5.1.10",
+    "chalk": "^5.0.0",
     "handlebars": "^4.7.7",
-    "tslib": "^2.1.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "^1.26.0",
-    "@oclif/test": "^1.2.8",
-    "@types/chai": "^4.2.15",
-    "@types/mocha": "^5",
-    "@types/node": "^14.14.28",
-    "chai": "^4.3.0",
-    "eslint": "^7.20.0",
-    "eslint-config-oclif": "^3.1.0",
-    "eslint-config-oclif-typescript": "^0.2.0",
-    "globby": "^11.0.2",
-    "mocha": "^5",
+    "@oclif/dev-cli": "^1.26.10",
+    "@oclif/test": "^2.0.3",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^14.18.3",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-config-oclif": "^4.0.0",
+    "eslint-config-oclif-typescript": "^1.0.2",
+    "globby": "^12.0.2",
+    "mocha": "^6.2.3",
     "nyc": "^15.1.0",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.5"
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
   },
   "engines": {
     "node": ">=14.0.0"
