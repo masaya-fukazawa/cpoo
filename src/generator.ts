@@ -1,19 +1,19 @@
 import {readFile, writeFile, readdir, access, mkdir} from 'fs/promises'
 import {join} from 'path'
 import {compile} from 'handlebars'
-import {blue, red, green} from 'chalk'
+import chalk from 'chalk'
 
 const checkDir = async (pathToComponent: string) => {
   try {
     await access(pathToComponent)
-    console.log(blue('info'), 'exited such directory!!\n')
+    console.log(chalk.blue, 'exited such directory!!\n')
   } catch {
-    console.log(blue('info'), 'No such directory, so make dir!!\n')
+    console.log(chalk.blue, 'No such directory, so make dir!!\n')
     try {
       await mkdir(pathToComponent, {recursive: true})
-      console.log(green('success'), 'completed to make directory!!\n')
+      console.log(chalk.green, 'completed to make directory!!\n')
     } catch (error) {
-      console.error(red('failed'), 'make directory :(\n')
+      console.error(chalk.red, 'make directory :(\n')
     }
   }
 }
@@ -28,9 +28,9 @@ export const generate = async (name: string, directory: string) => {
       const compiled = compile(buffer.toString())
       const fileName = template.replace('fc', name).slice(0, -4)
       await writeFile(join(pathToComponent, fileName), compiled({name, directory}))
-      console.info(green('success'), `created: ${pathToComponent}${fileName}`)
+      console.info(chalk.green, `created: ${pathToComponent}${fileName}`)
     } catch (error) {
-      console.error(red('failed'), 'generate component :(\n', error)
+      console.error(chalk.red, 'generate component :(\n', error)
     }
   }))
 }

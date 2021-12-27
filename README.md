@@ -19,7 +19,7 @@ $ npm install -g cpoo
 $ cpoo COMMAND
 running command...
 $ cpoo (-v|--version|version)
-cpoo/1.0.0 darwin-x64 node-v14.15.1
+cpoo/1.0.1 darwin-x64 node-v14.18.2
 $ cpoo --help [COMMAND]
 USAGE
   $ cpoo COMMAND
@@ -28,61 +28,22 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`cpoo generate [FILE] [DIRECTORY]`](#cpoo-generate-file-directory)
-* [`cpoo hello [FILE]`](#cpoo-hello-file)
 * [`cpoo help [COMMAND]`](#cpoo-help-command)
-
-## `cpoo generate [FILE] [DIRECTORY]`
-
-describe the command here
-
-```
-USAGE
-  $ cpoo generate [FILE] [DIRECTORY]
-
-OPTIONS
-  -d, --directory=directory  path to component
-  -f, --force
-  -h, --help                 show CLI help
-  -n, --name=name            name to print
-```
-
-_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.0/src/commands/generate.ts)_
-
-## `cpoo hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ cpoo hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ cpoo hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.0/src/commands/hello.ts)_
 
 ## `cpoo help [COMMAND]`
 
-display help for cpoo
+Display help for cpoo.
 
 ```
 USAGE
   $ cpoo help [COMMAND]
 
 ARGUMENTS
-  COMMAND  command to show help for
+  COMMAND  Command to show help for.
 
 OPTIONS
-  --all  see all commands in CLI
+  -n, --nested-commands  Include all nested commands in the output.
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.10/src/commands/help.ts)_
 <!-- commandsstop -->
