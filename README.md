@@ -19,7 +19,7 @@ $ npm install -g cpoo
 $ cpoo COMMAND
 running command...
 $ cpoo (--version)
-cpoo/1.0.7 darwin-x64 node-v14.18.2
+cpoo/1.0.9 darwin-x64 node-v14.18.2
 $ cpoo --help [COMMAND]
 USAGE
   $ cpoo COMMAND
@@ -28,8 +28,6 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`cpoo generate COMPONENTNAME [PATH]`](#cpoo-generate-componentname-path)
-* [`cpoo hello PERSON`](#cpoo-hello-person)
 * [`cpoo help [COMMAND]`](#cpoo-help-command)
 * [`cpoo plugins`](#cpoo-plugins)
 * [`cpoo plugins:inspect PLUGIN...`](#cpoo-pluginsinspect-plugin)
@@ -37,54 +35,6 @@ USAGE
 * [`cpoo plugins:link PLUGIN`](#cpoo-pluginslink-plugin)
 * [`cpoo plugins:uninstall PLUGIN...`](#cpoo-pluginsuninstall-plugin)
 * [`cpoo plugins:update`](#cpoo-pluginsupdate)
-
-## `cpoo generate COMPONENTNAME [PATH]`
-
-generate React Component
-
-```
-USAGE
-  $ cpoo generate [COMPONENTNAME] [PATH] [-h]
-
-ARGUMENTS
-  COMPONENTNAME  component name
-  PATH           path to component
-
-FLAGS
-  -h, --help  Show CLI help.
-
-DESCRIPTION
-  generate React Component
-
-EXAMPLES
-  $ cpoo generate Button src/components/atoms
-```
-
-_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.7/src/commands/generate.ts)_
-
-## `cpoo hello PERSON`
-
-Say hello
-
-```
-USAGE
-  $ cpoo hello [PERSON] -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Whom is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.7/src/commands/hello.ts)_
 
 ## `cpoo help [COMMAND]`
 
