@@ -1,7 +1,7 @@
 import {Command, Flags} from '@oclif/core'
 import {compile} from 'handlebars'
-import {access, mkdir, readdir, readFile, writeFile} from 'node:fs/promises'
-import {join} from 'node:path'
+import {access, mkdir, readdir, readFile, writeFile} from 'fs/promises'
+import {join} from 'path'
 
 const toPascalCase = (str: string) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 
