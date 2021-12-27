@@ -19,7 +19,7 @@ $ npm install -g cpoo
 $ cpoo COMMAND
 running command...
 $ cpoo (--version)
-cpoo/1.0.6 darwin-x64 node-v14.18.2
+cpoo/1.0.7 darwin-x64 node-v14.18.2
 $ cpoo --help [COMMAND]
 USAGE
   $ cpoo COMMAND
@@ -60,7 +60,7 @@ EXAMPLES
   $ cpoo generate Button src/components/atoms
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.6/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.7/src/commands/generate.ts)_
 
 ## `cpoo hello PERSON`
 
@@ -84,7 +84,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.6/src/commands/hello.ts)_
+_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.7/src/commands/hello.ts)_
 
 ## `cpoo help [COMMAND]`
 
