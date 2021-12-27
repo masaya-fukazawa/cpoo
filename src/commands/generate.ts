@@ -1,41 +1,63 @@
-import {Command, flags} from '@oclif/command'
-import {generate} from '../generator'
+import {Command, Flags} from '@oclif/core'
+import {compile} from 'handlebars'
+import {access, mkdir, readdir, readFile, writeFile} from 'node:fs/promises'
+import {join} from 'node:path'
 
-const atomics = ['atoms', 'molecules', 'organisms', 'organizations', 'templates', 'pages']
 const toPascalCase = (str: string) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 
 export default class Generate extends Command {
-  static description = 'describe the command here'
+  static description = 'generate React Component'
+
+  static examples = [
+    `$ cpoo generate Button src/components/atoms
+    `,
+  ]
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: flags.boolean({char: 'f'}),
-    directory: flags.string({char: 'd', description: 'path to component'}),
+    help: Flags.help({char: 'h'}),
   }
 
   static args = [
-    {name: 'file'},
-    {name: 'directory'},
+    {name: 'componentName', description: 'component name', required: true},
+    {name: 'path', description: 'path to component'},
   ]
 
-  async run() {
-    const {args} = this.parse(Generate)
-    if (!(args.file && args.directory)) {
-      console.error(`error: required argv[0] && argv[1].
-      Please specify the file name for argv[0].
-      Please specify the directory name for argv[1].
-      ex) atoms, molecules...`)
-      this.exit(1)
-    }
+  async run(): Promise<void> {
+    const {args} = await this.parse(Generate)
 
-    if (!atomics.includes(args.directory)) {
-      console.error(`error: Specify the module name of atomic design for the directory name.`)
-      this.exit(1)
-    }
     await generate(toPascalCase(args.file), args.directory)
     console.log('\n', 'info: completed to generate component :)')
   }
+}
+
+const checkDir = async (pathToComponent: string) => {
+  try {
+    await access(pathToComponent)
+    console.log('info: existed such directory!!\n')
+  } catch {
+    console.log('info: No such directory, so make dir!!\n')
+    try {
+      await mkdir(pathToComponent, {recursive: true})
+      console.log('success: completed to make directory!!\n')
+    } catch {
+      console.error('error: make directory :(\n')
+    }
+  }
+}
+
+export const generate = async (name: string, path: string) => {
+  const templates = await readdir(join(__dirname, '/templates/'))
+  const pathToComponent = join(process.cwd(), `${path}/${name}/`)
+  await checkDir(pathToComponent)
+  return Promise.all(templates.map(async template => {
+    try {
+      const buffer = await readFile(join(__dirname, `/templates/${template}`))
+      const compiled = compile(buffer.toString())
+      const fileName = template.replace('fc', name).slice(0, -4)
+      await writeFile(join(pathToComponent, fileName), compiled({name, path}))
+      console.info(`success: created: ${pathToComponent}${fileName}`)
+    } catch (error) {
+      console.error('error: generate component :(\n', error)
+    }
+  }))
 }

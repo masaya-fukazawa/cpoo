@@ -1,31 +1,23 @@
-import {Command, flags} from '@oclif/command'
+import {Command, Flags} from '@oclif/core'
 
 export default class Hello extends Command {
-  static description = 'describe the command here'
+  static description = 'Say hello'
 
   static examples = [
-    `$ cpoo hello
-hello world from ./src/hello.ts!
+    `$ oex hello friend --from oclif
+hello friend from oclif! (./src/commands/hello/index.ts)
 `,
   ]
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
-    force: flags.boolean({char: 'f'}),
+    from: Flags.string({char: 'f', description: 'Whom is saying hello', required: true}),
   }
 
-  static args = [{name: 'file'}]
+  static args = [{name: 'person', description: 'Person to say hello to', required: true}]
 
-  async run() {
-    const {args, flags} = this.parse(Hello)
+  async run(): Promise<void> {
+    const {args, flags} = await this.parse(Hello)
 
-    const name = flags.name ?? 'world'
-    this.log(`hello ${name} from ./src/commands/hello.ts`)
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`)
-    }
+    this.log(`hello ${args.person} from ${flags.from}! (./src/commands/hello/index.ts)`)
   }
 }
