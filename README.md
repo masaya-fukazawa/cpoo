@@ -19,7 +19,7 @@ $ npm install -g cpoo
 $ cpoo COMMAND
 running command...
 $ cpoo (-v|--version|version)
-cpoo/1.0.1 darwin-x64 node-v14.18.2
+cpoo/1.0.3 darwin-x64 node-v14.18.2
 $ cpoo --help [COMMAND]
 USAGE
   $ cpoo COMMAND

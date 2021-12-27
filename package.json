@@ -1,8 +1,9 @@
 {
   "name": "cpoo",
   "description": "simple react component generator",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "author": "Masaya Fukazawa @masaya-fukazawa",
+  "type": "module",
   "bin": {
     "cpoo": "./bin/run"
   },
