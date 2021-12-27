@@ -3,7 +3,6 @@
   "description": "simple react component generator",
   "version": "1.0.4",
   "author": "Masaya Fukazawa @masaya-fukazawa",
-  "type": "module",
   "bin": {
     "cpoo": "./bin/run"
   },
