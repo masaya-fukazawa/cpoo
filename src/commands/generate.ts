@@ -25,7 +25,7 @@ export default class Generate extends Command {
   async run(): Promise<void> {
     const {args} = await this.parse(Generate)
 
-    await generate(toPascalCase(args.file), args.directory)
+    await generate(toPascalCase(args.componentName), args.path)
     console.log('\n', 'info: completed to generate component :)')
   }
 }
