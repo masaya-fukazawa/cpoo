@@ -19,7 +19,7 @@ $ npm install -g cpoo
 $ cpoo COMMAND
 running command...
 $ cpoo (--version)
-cpoo/1.0.14 darwin-x64 node-v14.18.2
+cpoo/1.1.0 darwin-x64 node-v14.18.2
 $ cpoo --help [COMMAND]
 USAGE
   $ cpoo COMMAND
@@ -31,6 +31,7 @@ USAGE
 * [`cpoo generate COMPONENTNAME [PATH]`](#cpoo-generate-componentname-path)
 * [`cpoo hello PERSON`](#cpoo-hello-person)
 * [`cpoo help [COMMAND]`](#cpoo-help-command)
+* [`cpoo init`](#cpoo-init)
 * [`cpoo plugins`](#cpoo-plugins)
 * [`cpoo plugins:inspect PLUGIN...`](#cpoo-pluginsinspect-plugin)
 * [`cpoo plugins:install PLUGIN...`](#cpoo-pluginsinstall-plugin)
@@ -58,9 +59,16 @@ DESCRIPTION
 
 EXAMPLES
   $ cpoo generate Button src/components/atoms
+  info : No such directory, so make dir.
+  success : completed to make directory :3
+  success created: /your/project/src/components/atoms/Button/Button.stories.tsx
+  success created: /your/project/src/components/atoms/Button/Button.test.tsx
+  success created: /your/project/src/components/atoms/Button/Button.tsx
+  success created: /your/project/src/components/atoms/Button/Button.ts
+   info : completed to generate component :)
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.14/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.0/src/commands/generate.ts)_
 
 ## `cpoo hello PERSON`
 
@@ -84,7 +92,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.0.14/src/commands/hello.ts)_
+_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.0/src/commands/hello.ts)_
 
 ## `cpoo help [COMMAND]`
 
@@ -105,6 +113,23 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v5.1.9/src/commands/help.ts)_
+
+## `cpoo init`
+
+initialize "cpoo"
+
+```
+USAGE
+  $ cpoo init
+
+DESCRIPTION
+  initialize "cpoo"
+
+EXAMPLES
+  $ cpoo init
+```
+
+_See code: [src/commands/init/index.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.0/src/commands/init/index.ts)_
 
 ## `cpoo plugins`
 
