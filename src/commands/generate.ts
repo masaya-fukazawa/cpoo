@@ -2,6 +2,7 @@ import {Command, Flags} from '@oclif/core'
 import {compile} from 'handlebars'
 import {access, mkdir, readFile, readdir, writeFile} from 'fs/promises'
 import {join} from 'path'
+import {Config} from '../config'
 import {error, info, success} from '../utils/prefix'
 import {toPascalCase, getLastDirectry} from '../utils/string'
 
@@ -38,7 +39,9 @@ success created: /your/project/src/components/atoms/Button/Button.ts
     const {componentName, path} = args
     const pathToComponent = join(process.cwd(), `${path}/${componentName}/`)
     await this.makeDir(pathToComponent)
-    await this.generate(componentName, path)
+    const config = await this.readConfig()
+    console.log(config)
+    await this.generate(componentName, path, config)
     this.log('\n', info(), ': completed to generate component :)')
   }
 
@@ -53,7 +56,7 @@ success created: /your/project/src/components/atoms/Button/Button.ts
     }
   }
 
-  private async generate(name: string, path: string) {
+  private async generate(name: string, path: string, config: Config) {
     const templates = await readdir(join(__dirname, '/templates/'))
     const pathToComponent = join(process.cwd(), `${path}/${name}/`)
     return Promise.all(templates.map(async template => {
@@ -67,5 +70,17 @@ success created: /your/project/src/components/atoms/Button/Button.ts
         this.log(error(), ': generate component :(\n', error_)
       }
     }))
+  }
+  
+  private async readConfig() {
+    try {
+      const config = await readFile(join(process.cwd(), '.cpoorc'), 'utf-8')
+      return Promise.resolve<Config>(JSON.parse(config))
+    } catch {
+      return Promise.resolve<Config>({
+        extension: '',
+        types: []
+      })
+    }
   }
 }

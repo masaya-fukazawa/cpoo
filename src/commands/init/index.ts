@@ -44,7 +44,7 @@ export default class Init extends Command {
       extension: fileExt,
       types: fileTypes,
     }
-    await writeFile(join(process.cwd(), '.cpoorc'), JSON.stringify(json, null, '\t'))
+    await writeFile(join(process.cwd(), '.cpoorc'), JSON.stringify(json, null, 2))
     this.log(success(), 'initialize "cpoo" :)')
     this.log('\n')
     this.log(info(), 'next, you can use "cpoo generate"')
