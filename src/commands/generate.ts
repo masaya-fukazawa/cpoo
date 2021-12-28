@@ -3,14 +3,24 @@ import {compile} from 'handlebars'
 import {access, mkdir, readFile, readdir, writeFile} from 'fs/promises'
 import {join} from 'path'
 import {error, info, success} from '../utils/prefix'
-
-const toPascalCase = (str: string) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+import {toPascalCase, getLastDirectry} from '../utils/string'
 
 export default class Generate extends Command {
   static description = 'generate React Component'
 
   static examples = [
     `$ cpoo generate Button src/components/atoms
+
+info : No such directory, so make dir.
+
+success : completed to make directory :3
+
+success created: /your/project/src/components/atoms/Button/Button.stories.tsx
+success created: /your/project/src/components/atoms/Button/Button.test.tsx
+success created: /your/project/src/components/atoms/Button/Button.tsx
+success created: /your/project/src/components/atoms/Button/Button.ts
+
+ info : completed to generate component :)
     `,
   ]
 
@@ -24,37 +34,34 @@ export default class Generate extends Command {
   ]
 
   async run(): Promise<void> {
-    const {args} = await this.parse(Generate)
-
-    await this.generate(toPascalCase(args.componentName), args.path)
+    const {args} = await this.parse<{}, {componentName: string, path: string}>(Generate)
+    const {componentName, path} = args
+    const pathToComponent = join(process.cwd(), `${path}/${componentName}/`)
+    await this.makeDir(pathToComponent)
+    await this.generate(componentName, path)
     this.log('\n', info(), ': completed to generate component :)')
   }
 
-  private async checkDir(pathToComponent: string) {
+  private async makeDir(pathToComponent: string) {
     try {
       await access(pathToComponent)
       this.log(info(), ': existed such directory.\n')
     } catch {
       console.log(info(), ': No such directory, so make dir.\n')
-      try {
-        await mkdir(pathToComponent, {recursive: true})
-        this.log(success(), ': completed to make directory :3\n')
-      } catch {
-        this.log(error(), ': make directory :(\n')
-      }
+      await mkdir(pathToComponent, {recursive: true})
+      this.log(success(), ': completed to make directory :3\n')
     }
   }
 
   private async generate(name: string, path: string) {
     const templates = await readdir(join(__dirname, '/templates/'))
     const pathToComponent = join(process.cwd(), `${path}/${name}/`)
-    await this.checkDir(pathToComponent)
     return Promise.all(templates.map(async template => {
       try {
         const buffer = await readFile(join(__dirname, `/templates/${template}`))
         const compiled = compile(buffer.toString())
         const fileName = template.replace('fc', name).slice(0, -4)
-        await writeFile(join(pathToComponent, fileName), compiled({name, path}))
+        await writeFile(join(pathToComponent, fileName), compiled({name, directry: getLastDirectry(path)}))
         this.log(`${success()} created: ${pathToComponent}${fileName}`)
       } catch (error_) {
         this.log(error(), ': generate component :(\n', error_)
