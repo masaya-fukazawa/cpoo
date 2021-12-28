@@ -5,6 +5,42 @@
   ],
   "rules": {
     "unicorn/prefer-node-protocol": "off",
-    "unicorn/import-style": "off"
+    "unicorn/import-style": "off",
+    "node/no-missing-import": "off",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "quote-props": ["error", "as-needed"],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "jest/no-mocks-import": "off",
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-param-reassign": "error",
+    "prefer-spread": "error",
+    "complexity": [
+      "error",
+      3
+    ],
+    "camelcase": "error",
+    "sort-imports": ["error", {
+      "ignoreDeclarationSort": true,
+      "memberSyntaxSortOrder": ["all", "multiple", "single", "none"]
+    }],
+    "no-shadow": "error",
+    "eqeqeq": "error",
+    "no-bitwise": "error",
+    "no-constant-condition": "error",
+    "no-multiple-empty-lines": "error",
+    "indent": [
+      "error",
+      2
+    ],
+    "arrow-body-style": ["error", "as-needed"],
+    "object-curly-spacing": "error",
+    "array-bracket-spacing": "error"
   }
 }
