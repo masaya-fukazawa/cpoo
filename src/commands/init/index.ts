@@ -2,7 +2,6 @@ import {Command} from '@oclif/core'
 import {stat, writeFile} from 'fs/promises'
 import {join} from 'path'
 import {info, success} from '../../utils/prefix'
-import cli from 'cli-ux'
 import {prompt} from 'inquirer'
 
 export default class Init extends Command {
@@ -31,18 +30,25 @@ export default class Init extends Command {
       name: 'fileExt',
       message: 'What file extensions do you use?',
       type: 'list',
-      choices: [{name: 'tsx', checked: true}, {name: 'jsx'}, {name: 'ts'}, {name: 'js'}]
+      choices: [{name: 'tsx', checked: true}, {name: 'jsx'}, {name: 'ts'}, {name: 'js'}],
     }])
     const {fileTypes} = await prompt([{
       name: 'fileTypes',
       message: 'Which file types do you want to output? (default: component file only)',
       type: 'checkbox',
-      choices: [{name: 'index', checked: true}, {name: 'storybook'}, {name: 'test'}]
+      choices: [{name: 'index', checked: true}, {name: 'storybook'}, {name: 'test'}],
+    }])
+    const {testMatch} = await prompt([{
+      name: 'testMatch',
+      message: 'What test matches do you use?',
+      type: 'list',
+      choices: [{name: 'test', checked: true}, {name: 'spec'}],
     }])
 
     const json = {
       extension: fileExt,
       types: fileTypes,
+      testMatch,
     }
     await writeFile(join(process.cwd(), '.cpoorc'), JSON.stringify(json, null, 2))
     this.log(success(), 'initialize "cpoo" :)')
