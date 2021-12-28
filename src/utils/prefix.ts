@@ -1,6 +1,6 @@
-import chalk from 'chalk'
+import {green, red, blue, yellow} from 'chalk'
 
-export const info = () => chalk.blue('info')
-export const success = () => chalk.green('success')
-export const warning = () => chalk.yellow('warning')
-export const error = () => chalk.red('error')
+export const info = () => blue('info')
+export const success = () => green('success')
+export const warning = () => yellow('warning')
+export const error = () => red('error')
