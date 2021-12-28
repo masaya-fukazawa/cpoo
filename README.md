@@ -19,7 +19,7 @@ $ npm install -g cpoo
 $ cpoo COMMAND
 running command...
 $ cpoo (--version)
-cpoo/1.1.0 darwin-x64 node-v14.18.2
+cpoo/1.1.1 darwin-x64 node-v14.18.2
 $ cpoo --help [COMMAND]
 USAGE
   $ cpoo COMMAND
@@ -68,7 +68,7 @@ EXAMPLES
    info : completed to generate component :)
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.0/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.1/src/commands/generate.ts)_
 
 ## `cpoo hello PERSON`
 
@@ -92,7 +92,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.0/src/commands/hello.ts)_
+_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.1/src/commands/hello.ts)_
 
 ## `cpoo help [COMMAND]`
 
@@ -129,7 +129,7 @@ EXAMPLES
   $ cpoo init
 ```
 
-_See code: [src/commands/init/index.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.0/src/commands/init/index.ts)_
+_See code: [src/commands/init/index.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.1/src/commands/init/index.ts)_
 
 ## `cpoo plugins`
 
