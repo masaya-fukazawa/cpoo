@@ -3,9 +3,9 @@ import {compile} from 'handlebars'
 import {access, mkdir, readFile, readdir, writeFile} from 'fs/promises'
 import {join} from 'path'
 // eslint-disable-next-line node/no-missing-import
-import {Config} from '../config'
-import {error, info, success} from '../utils/prefix'
-import {getLastDirectry} from '../utils/string'
+import {Config} from '../../config'
+import {error, info, success} from '../../utils/prefix'
+import {getLastDirectry} from '../../utils/string'
 
 export default class Generate extends Command {
   static description = 'generate React Component'
@@ -41,7 +41,6 @@ success created: /your/project/src/components/atoms/Button/Button.ts
     const pathToComponent = join(process.cwd(), `${path}/${componentName}/`)
     await this.makeDir(pathToComponent)
     const config = await this.readConfig()
-    console.log(config)
     await this.generate(componentName, path, config)
     this.log('\n', info(), ': completed to generate component :)')
   }
@@ -51,7 +50,7 @@ success created: /your/project/src/components/atoms/Button/Button.ts
       await access(pathToComponent)
       this.log(info(), ': existed such directory.\n')
     } catch {
-      console.log(info(), ': No such directory, so make dir.\n')
+      this.log(info(), ': No such directory, so make dir.\n')
       await mkdir(pathToComponent, {recursive: true})
       this.log(success(), ': completed to make directory :3\n')
     }
@@ -61,23 +60,18 @@ success created: /your/project/src/components/atoms/Button/Button.ts
     const templates = await readdir(join(__dirname, '/templates/'))
     const pathToComponent = join(process.cwd(), `${path}/${name}/`)
     return Promise.all(templates
+      .filter(t => this.isGenerate(t, config.types))
       // eslint-disable-next-line complexity
-      .filter(t => {
-        const fileType = t.includes('stories') ?
-          'storybook' :
-          // eslint-disable-next-line unicorn/no-nested-ternary
-          (t.includes('test') ? 'test' : t.includes('index') ? 'index' : 'component')
-        return fileType === 'component' || config.types.includes(fileType)
-      })
       .map(async template => {
         try {
           const buffer = await readFile(join(__dirname, `/templates/${template}`))
           const compiled = compile(buffer.toString())
           const ext = template.includes('index') ? config.extension.replace('x', '') : config.extension
           const fileName = template
+            .slice(template.indexOf('.') + 1)
             .replace('{name}', name)
-            .replace('{testMatch}', config.testMatch)
-            .replace('{ext}', ext)
+            .replace('{testMatch}', config.testMatch ?? 'test')
+            .replace('{ext}', ext ?? 'js')
             .slice(0, -4)
           await writeFile(join(pathToComponent, fileName), compiled({name, directry: getLastDirectry(path)}))
           this.log(`${success()} created: ${pathToComponent}${fileName}`)
@@ -98,5 +92,13 @@ success created: /your/project/src/components/atoms/Button/Button.ts
         testMatch: '',
       })
     }
+  }
+
+  private isGenerate(templateName: string, fileTypes: string[]): boolean {
+    if (templateName.includes('component')) {
+      return true
+    }
+
+    return fileTypes.some(t => templateName.includes(t))
   }
 }
