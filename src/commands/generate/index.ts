@@ -28,6 +28,8 @@ success created: /your/project/src/components/atoms/Button/Button.ts
 
   static flags = {
     help: Flags.help({char: 'h'}),
+    excludeTest: Flags.boolean({default: false, description: 'exclude generating test file.'}),
+    excludeStory: Flags.boolean({default: false, description: 'exclude generating storybook file.'}),
   }
 
   static args = [
@@ -36,12 +38,13 @@ success created: /your/project/src/components/atoms/Button/Button.ts
   ]
 
   async run(): Promise<void> {
-    const {args} = await this.parse<unknown, {componentName: string, path: string}>(Generate)
+    const {args, flags} = await this.parse<{excludeTest: boolean, excludeStory: boolean}, {componentName: string, path: string}>(Generate)
+    const {excludeTest, excludeStory} = flags
     const {componentName, path} = args
     const pathToComponent = join(process.cwd(), `${path}/${componentName}/`)
     await this.makeDir(pathToComponent)
     const config = await this.readConfig()
-    await this.generate(componentName, path, config)
+    await this.generate(componentName, path, config, excludeTest, excludeStory)
     this.log('\n', info(), ': completed to generate component :)')
   }
 
@@ -56,12 +59,11 @@ success created: /your/project/src/components/atoms/Button/Button.ts
     }
   }
 
-  private async generate(name: string, path: string, config: Config) {
+  private async generate(name: string, path: string, config: Config, excludeTest: boolean, excludeStory: boolean) {
     const templates = await readdir(join(__dirname, '/templates/'))
     const pathToComponent = join(process.cwd(), `${path}/${name}/`)
     return Promise.all(templates
-      .filter(t => this.isGenerate(t, config.types))
-      // eslint-disable-next-line complexity
+      .filter(t => this.isGenerate(t, config.types, excludeTest, excludeStory))
       .map(async template => {
         try {
           const buffer = await readFile(join(__dirname, `/templates/${template}`))
@@ -94,9 +96,17 @@ success created: /your/project/src/components/atoms/Button/Button.ts
     }
   }
 
-  private isGenerate(templateName: string, fileTypes: string[]): boolean {
+  private isGenerate(templateName: string, fileTypes: string[], excludeTest: boolean, excludeStory: boolean): boolean {
     if (templateName.includes('component')) {
       return true
+    }
+
+    if (templateName.includes('test') && excludeTest) {
+      return false
+    }
+
+    if (templateName.includes('storybook') && excludeStory) {
+      return false
     }
 
     return fileTypes.some(t => templateName.includes(t))
