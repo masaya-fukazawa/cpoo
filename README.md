@@ -19,7 +19,7 @@ $ npm install -g cpoo
 $ cpoo COMMAND
 running command...
 $ cpoo (--version)
-cpoo/1.1.1 darwin-x64 node-v14.18.2
+cpoo/1.2.0 darwin-x64 node-v14.18.2
 $ cpoo --help [COMMAND]
 USAGE
   $ cpoo COMMAND
@@ -29,7 +29,6 @@ USAGE
 # Commands
 <!-- commands -->
 * [`cpoo generate COMPONENTNAME [PATH]`](#cpoo-generate-componentname-path)
-* [`cpoo hello PERSON`](#cpoo-hello-person)
 * [`cpoo help [COMMAND]`](#cpoo-help-command)
 * [`cpoo init`](#cpoo-init)
 * [`cpoo plugins`](#cpoo-plugins)
@@ -45,14 +44,16 @@ generate React Component
 
 ```
 USAGE
-  $ cpoo generate [COMPONENTNAME] [PATH] [-h]
+  $ cpoo generate [COMPONENTNAME] [PATH] [-h] [--excludeTest] [--excludeStory]
 
 ARGUMENTS
   COMPONENTNAME  component name
   PATH           path to component
 
 FLAGS
-  -h, --help  Show CLI help.
+  -h, --help      Show CLI help.
+  --excludeStory  exclude generating storybook file.
+  --excludeTest   exclude generating test file.
 
 DESCRIPTION
   generate React Component
@@ -68,31 +69,7 @@ EXAMPLES
    info : completed to generate component :)
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.1/src/commands/generate.ts)_
-
-## `cpoo hello PERSON`
-
-Say hello
-
-```
-USAGE
-  $ cpoo hello [PERSON] -f <value>
-
-ARGUMENTS
-  PERSON  Person to say hello to
-
-FLAGS
-  -f, --from=<value>  (required) Whom is saying hello
-
-DESCRIPTION
-  Say hello
-
-EXAMPLES
-  $ oex hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
-```
-
-_See code: [src/commands/hello.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.1/src/commands/hello.ts)_
+_See code: [src/commands/generate/index.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.2.0/src/commands/generate/index.ts)_
 
 ## `cpoo help [COMMAND]`
 
@@ -129,7 +106,7 @@ EXAMPLES
   $ cpoo init
 ```
 
-_See code: [src/commands/init/index.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.1.1/src/commands/init/index.ts)_
+_See code: [src/commands/init/index.ts](https://github.com/masaya-fukazawa/cpoo/blob/v1.2.0/src/commands/init/index.ts)_
 
 ## `cpoo plugins`
 
